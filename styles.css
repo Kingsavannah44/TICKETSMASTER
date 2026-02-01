@@ -633,103 +633,241 @@ button:active {
   transform: scale(1.1);
 }
 
-/* Auth Modal Enhancements */
+/* Enhanced Login Page Styling */
+#auth-modal {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 31, 54, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .auth-modal-content {
-  max-width: 500px;
-  padding: 3.5rem;
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--surface-bg) 100%);
+  border: 2px solid var(--border-light);
+  box-shadow: var(--shadow-2xl), 0 0 40px rgba(235, 0, 27, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-modal-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  animation: loginGlow 2s ease-in-out infinite;
+}
+
+@keyframes loginGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .auth-logo {
-  text-align: center;
-  margin-bottom: 2.5rem;
+  position: relative;
+  padding: 2rem 0;
 }
 
-.auth-logo svg {
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+.auth-logo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
 }
 
 .auth-brand {
-  display: block;
-  font-family: "Space Grotesk", monospace;
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(235, 0, 27, 0.3);
+  position: relative;
 }
 
-/* Auth Toggle Buttons */
 .auth-toggle {
-  display: flex;
-  gap: 0;
-  margin-bottom: 2.5rem;
-  background: var(--light-bg);
-  border-radius: var(--border-radius-md);
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
+  background: var(--dark-bg);
+  border: 2px solid var(--border-color);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .toggle-btn {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 1rem;
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: var(--transition-normal);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
 }
 
-.toggle-btn.active {
-  background: var(--gradient-primary);
-  color: white;
-  box-shadow: var(--shadow-sm);
+.toggle-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: var(--transition-slow);
 }
 
-.toggle-btn:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+.toggle-btn:hover::before {
+  left: 100%;
 }
 
-/* Auth Form Styling */
 .auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  position: relative;
 }
 
 .auth-form h2 {
-  font-family: "Space Grotesk", monospace;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1.5rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.auth-form h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.auth-form input {
+  background: var(--dark-bg);
+  border: 2px solid var(--border-color);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.auth-form input:focus {
+  border-color: var(--primary-color);
+  background: var(--light-bg);
+  box-shadow: 0 0 0 4px rgba(235, 0, 27, 0.1), 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.auth-form label {
   color: var(--text-primary);
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .auth-submit-btn {
-  background: var(--gradient-primary);
-  padding: 1.25rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-top: 1rem;
-  border-radius: var(--border-radius-md);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(235, 0, 27, 0.3);
+  border: 2px solid transparent;
+}
+
+.auth-submit-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition-slow);
+}
+
+.auth-submit-btn:hover::before {
+  left: 100%;
 }
 
 .auth-submit-btn:hover {
-  background: var(--gradient-secondary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-xl), 0 0 30px rgba(235, 0, 27, 0.4);
+}
+
+.auth-link a {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0;
+}
+
+.auth-link a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: var(--transition-normal);
+}
+
+.auth-link a:hover::before {
+  width: 100%;
+}
+
+/* Login Form Enhancements */
+#login-form,
+#signup-form {
+  animation: formSlideIn 0.5s ease;
+}
+
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input Focus Effects */
+.auth-form input:focus + label,
+.auth-form input:not(:placeholder-shown) + label {
+  transform: translateY(-25px) scale(0.85);
+  color: var(--primary-color);
+}
+
+/* Floating Label Effect */
+.input-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1.2rem 1rem 0.8rem;
+}
+
+.input-group label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: transparent;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--primary-color);
+}
+
+/* Success/Error States for Login */
+.auth-form input.success {
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.auth-form input.error {
+  border-color: var(--danger-color);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 /* Payment Modal Enhancements */
