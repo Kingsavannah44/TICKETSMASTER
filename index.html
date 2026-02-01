@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TICKETSMASTER - Event Ticketing</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-payment">&times;</span>
+        <h2>Payment Information</h2>
+
+        <!-- Mastercard Logo -->
+        <div class="card-logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="80"
+            height="50"
+            viewBox="0 0 80 50"
+          >
+            <rect width="80" height="50" rx="5" fill="#1a1f36" />
+            <circle cx="25" cy="25" r="20" fill="#eb001b" />
+            <circle cx="55" cy="25" r="20" fill="#f79e1b" />
+            <path
+              d="M40 35.5a20 20 0 0 1-2.5-10.5 20 20 0 0 1 2.5-10.5 20 20 0 0 1 5 10.5 20 20 0 0 1-5 10.5z"
+              fill="#ff5f00"
+            />
+          </svg>
+          <span class="card-brand">Mastercard</span>
+        </div>
+
+        <form id="payment-form">
+          <label for="payment-card-number">Card Number:</label>
+          <input
+            type="text"
+            id="payment-card-number"
+            placeholder="1234 5678 9012 3456"
+            maxlength="19"
+            required
+          />
+
+          <label for="payment-card-expiry">Expiry Date:</label>
+          <input
+            type="text"
+            id="payment-card-expiry"
+            placeholder="MM/YY"
+            maxlength="5"
+            required
+          />
+
+          <label for="payment-card-cvv">CVV:</label>
+          <input
+            type="text"
+            id="payment-card-cvv"
+            placeholder="123"
+            maxlength="4"
+            required
+          />
+
+          <label for="payment-card-name">Name on Card:</label>
+          <input
+            type="text"
+            id="payment-card-name"
+            placeholder="John Doe"
+            required
+          />
+
+          <button type="submit" class="payment-btn">Save Payment Method</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Auth Modal (Single Page for Login & Create Account) -->
+    <div id="auth-modal" class="modal">
+      <div class="modal-content auth-modal-content">
+
+        <!-- Mastercard Logo as Brand -->
+        <div class="auth-logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="60"
+            height="38"
+            viewBox="0 0 80 50"
+          >
+            <rect width="80" height="50" rx="5" fill="#1a1f36" />
+            <circle cx="25" cy="25" r="20" fill="#eb001b" />
+            <circle cx="55" cy="25" r="20" fill="#f79e1b" />
+            <path
+              d="M40 35.5a20 20 0 0 1-2.5-10.5 20 20 0 0 1 2.5-10.5 20 20 0 0 1 5 10.5 20 20 0 0 1-5 10.5z"
+              fill="#ff5f00"
+            />
+          </svg>
+          <span class="auth-brand">TICKETSMASTER</span>
+        </div>
+
+        <!-- Toggle Buttons -->
+        <div class="auth-toggle">
+          <button id="show-login" class="toggle-btn active">Login</button>
+          <button id="show-signup" class="toggle-btn">Create Account</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="auth-form">
+          <h2>Welcome Back</h2>
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter your username"
+            required
+          />
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+          <button type="submit" class="auth-submit-btn">Login</button>
+          <p class="auth-link">
+            Add payment method? <a href="#" id="go-to-payment">Click here</a>
+          </p>
+          <p class="auth-link">
+            Admin? <a href="#" id="go-to-admin-login">Admin Login</a>
+          </p>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signup-form" class="auth-form" style="display: none">
+          <h2>Create Account</h2>
+          <label for="signup-name">Full Name:</label>
+          <input
+            type="text"
+            id="signup-name"
+            placeholder="Enter your full name"
+            required
+          />
+          <label for="signup-email">Email:</label>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="Enter your email"
+            required
+          />
+          <label for="signup-username">Username:</label>
+          <input
+            type="text"
+            id="signup-username"
+            placeholder="Choose a username"
+            required
+          />
+          <label for="signup-password">Password:</label>
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="Create a password"
+            required
+          />
+          <button type="submit" class="auth-submit-btn">Create Account</button>
+          <p class="auth-link">
+            Already have an account?
+            <a href="#" id="go-to-login-from-signup">Login here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="modal">
+      <div class="modal-content auth-modal-content">
+        <span class="close-admin">&times;</span>
+        <div class="auth-logo">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="60"
+            height="38"
+            viewBox="0 0 80 50"
+          >
+            <rect width="80" height="50" rx="5" fill="#1a1f36" />
+            <circle cx="25" cy="25" r="20" fill="#eb001b" />
+            <circle cx="55" cy="25" r="20" fill="#f79e1b" />
+            <path
+              d="M40 35.5a20 20 0 0 1-2.5-10.5 20 20 0 0 1 2.5-10.5 20 20 0 0 1 5 10.5 20 20 0 0 1-5 10.5z"
+              fill="#ff5f00"
+            />
+          </svg>
+          <span class="auth-brand">Admin Panel</span>
+        </div>
+        
+        <form id="admin-login-form" class="auth-form">
+          <h2>Admin Login</h2>
+          <label for="admin-username">Admin Username:</label>
+          <input
+            type="text"
+            id="admin-username"
+            placeholder="Enter admin username"
+            required
+          />
+          <label for="admin-password">Admin Password:</label>
+          <input
+            type="password"
+            id="admin-password"
+            placeholder="Enter admin password"
+            required
+          />
+          <button type="submit" class="auth-submit-btn">Admin Login</button>
+          <p class="auth-link">
+            <a href="#" id="go-to-user-login">Back to User Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div id="main-content" style="display: none">
+      <header>
+        <h1>TICKETSMASTER</h1>
+        <nav>
+          <a href="#events">Events</a>
+          <a href="#buy">Buy Tickets</a>
+          <a href="#sell">Sell Tickets</a>
+          <a href="#create-event">Create Event</a>
+          <button id="admin-dashboard-btn" class="nav-btn" style="display: none;">
+            Admin Dashboard
+          </button>
+          <button id="payment-method-btn" class="nav-btn">
+            Payment Method
+          </button>
+          <button
+            id="logout-btn"
+            class="nav-btn"
+            style="background-color: #dc3545"
+          >
+            Logout
+          </button>
+        </nav>
+      </header>
+
+      <section id="events">
+        <h2>Upcoming Events</h2>
+        <div id="event-list" class="event-list">
+          <!-- Events will be populated by JavaScript -->
+        </div>
+      </section>
+
+      <section id="buy">
+        <h2>Buy Tickets</h2>
+        <form id="buy-form">
+          <label for="event-select">Select Event:</label>
+          <select id="event-select" required>
+            <option value="">Choose an event</option>
+            <!-- Options will be populated by JavaScript -->
+          </select>
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1" required />
+          <button type="submit">Buy Tickets</button>
+        </form>
+      </section>
+
+      <section id="sell">
+        <h2>Sell Tickets</h2>
+        <form id="sell-form">
+          <label for="sell-event-select">Select Event:</label>
+          <select id="sell-event-select" required>
+            <option value="">Choose an event</option>
+            <!-- Options will be populated by JavaScript -->
+          </select>
+          <label for="sell-quantity">Quantity:</label>
+          <input type="number" id="sell-quantity" min="1" required />
+          <label for="sell-price">Price per Ticket ($):</label>
+          <input type="number" id="sell-price" min="0" step="0.01" required />
+          <button type="submit">List Tickets for Sale</button>
+        </form>
+      </section>
+
+      <!-- Create Event Section -->
+      <section id="create-event">
+        <h2>Create New Event</h2>
+        <form id="create-event-form">
+          <label for="event-name">Event Name:</label>
+          <input type="text" id="event-name" placeholder="Enter event name" required />
+
+          <label for="event-date">Date:</label>
+          <input type="date" id="event-date" required />
+
+          <label for="event-location">Location:</label>
+          <input type="text" id="event-location" placeholder="Enter venue/address" required />
+
+          <label>Position (Optional - Click to get current location):</label>
+          <div class="position-inputs">
+            <input type="number" id="event-lat" placeholder="Latitude" step="any" />
+            <input type="number" id="event-lng" placeholder="Longitude" step="any" />
+          </div>
+          <button type="button" id="get-current-location" class="nav-btn">📍 Use My Location</button>
+
+          <label for="event-description">Description:</label>
+          <textarea id="event-description" rows="3" placeholder="Enter event description"></textarea>
+
+          <label for="event-price">Ticket Price ($):</label>
+          <input type="number" id="event-price" min="0" step="0.01" value="0" required />
+
+          <label for="event-available-tickets">Available Tickets:</label>
+          <input type="number" id="event-available-tickets" min="1" value="100" required />
+
+          <button type="submit" class="auth-submit-btn">Create Event</button>
+        </form>
+      </section>
+
+      <!-- Admin Dashboard Section -->
+      <section id="admin-dashboard" style="display: none;">
+        <h2>Admin Dashboard</h2>
+        
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="events-manage">Manage Events</button>
+          <button class="admin-tab" data-tab="users-manage">Manage Users</button>
+        </div>
+
+        <!-- Manage Events Tab -->
+        <div id="events-manage" class="admin-tab-content active">
+          <h3>All Events</h3>
+          <div id="admin-event-list" class="admin-event-list">
+            <!-- Admin events will be populated here -->
+          </div>
+          
+          <h3 style="margin-top: 2rem;">Add New Event</h3>
+          <form id="admin-create-event-form">
+            <label for="admin-event-name">Event Name:</label>
+            <input type="text" id="admin-event-name" placeholder="Enter event name" required />
+
+            <label for="admin-event-date">Date:</label>
+            <input type="date" id="admin-event-date" required />
+
+            <label for="admin-event-location">Location:</label>
+            <input type="text" id="admin-event-location" placeholder="Enter venue/address" required />
+
+            <label for="admin-event-description">Description:</label>
+            <textarea id="admin-event-description" rows="3" placeholder="Enter event description"></textarea>
+
+            <label for="admin-event-price">Ticket Price ($):</label>
+            <input type="number" id="admin-event-price" min="0" step="0.01" value="0" required />
+
+            <label for="admin-event-available-tickets">Available Tickets:</label>
+            <input type="number" id="admin-event-available-tickets" min="1" value="100" required />
+
+            <button type="submit" class="auth-submit-btn">Add Event</button>
+          </form>
+        </div>
+
+        <!-- Manage Users Tab -->
+        <div id="users-manage" class="admin-tab-content">
+          <h3>All Users</h3>
+          <div id="admin-user-list" class="admin-user-list">
+            <!-- Admin users will be populated here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Edit Event Modal -->
+      <div id="edit-event-modal" class="modal">
+        <div class="modal-content">
+          <span class="close-edit-event">&times;</span>
+          <h2>Edit Event</h2>
+          <form id="edit-event-form">
+            <input type="hidden" id="edit-event-id" />
+            
+            <label for="edit-event-name">Event Name:</label>
+            <input type="text" id="edit-event-name" required />
+
+            <label for="edit-event-date">Date:</label>
+            <input type="date" id="edit-event-date" required />
+
+            <label for="edit-event-location">Location:</label>
+            <input type="text" id="edit-event-location" required />
+
+            <label for="edit-event-description">Description:</label>
+            <textarea id="edit-event-description" rows="3"></textarea>
+
+            <label for="edit-event-price">Ticket Price ($):</label>
+            <input type="number" id="edit-event-price" min="0" step="0.01" required />
+
+            <label for="edit-event-available-tickets">Available Tickets:</label>
+            <input type="number" id="edit-event-available-tickets" min="1" required />
+
+            <button type="submit" class="auth-submit-btn">Update Event</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="25"
+              viewBox="0 0 80 50"
+            >
+              <rect width="80" height="50" rx="5" fill="#1a1f36" />
+              <circle cx="25" cy="25" r="20" fill="#eb001b" />
+              <circle cx="55" cy="25" r="20" fill="#f79e1b" />
+              <path
+                d="M40 35.5a20 20 0 0 1-2.5-10.5 20 20 0 0 1 2.5-10.5 20 20 0 0 1 5 10.5 20 20 0 0 1-5 10.5z"
+                fill="#ff5f00"
+              />
+            </svg>
+            <span class="footer-brand-text">TICKETSMASTER</span>
+          </div>
+          <div class="footer-links">
+            <a href="#events">Events</a>
+            <a href="#buy">Buy Tickets</a>
+            <a href="#sell">Sell Tickets</a>
+            <a href="#create-event">Create Event</a>
+          </div>
+          <div class="footer-social">
+            <a href="#" class="social-link" title="Twitter">𝕏</a>
+            <a href="#" class="social-link" title="Facebook">f</a>
+            <a href="#" class="social-link" title="Instagram">📷</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 TICKETSMASTER. All rights reserved.</p>
+          <p class="footer-tagline">Your trusted platform for event tickets</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
