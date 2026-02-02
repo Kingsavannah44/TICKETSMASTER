@@ -38,6 +38,8 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "MONGODB_URI": "mongodb+srv://ticketsmaster:TicketsMaster123@cluster0.hkxf6ki.mongodb.net/ticketsmaster?appName=Cluster0",
+    "JWT_SECRET": "ticketsmaster-secret-key-change-in-production"
   }
 }
